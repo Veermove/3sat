@@ -1,40 +1,16 @@
 #include <iostream>
+#include <vector>
 #include <string>
-#include "./CNodeStatic.hpp"
+#include "CMax3SatProblem.hpp"
 
-int main () {
-    std::cout << "start";
-    CNodeStatic  c_root; 
+int main () 
+{
+    CMax3SatProblem problem;
+    // problem.load("m3s_50_0.txt");
 
-    c_root.vAddNewChild(); 
+    std::vector<bool> a;
+    a.push_back(false);
+    a.push_back(true);
 
-    // c_root.vAddNewChild(); 
-
-    
-
-    // c_root.pcGetChild(0)->vSetValue(1); 
-
-    // c_root.pcGetChild(1)->vSetValue(2); 
-    
-
-    // c_root.pcGetChild(0)->vAddNewChild(); 
-
-    // c_root.pcGetChild(0)->vAddNewChild(); 
-
-    
-
-    // c_root.pcGetChild(0)->pcGetChild(0)->vSetValue(11); 
-    // c_root.pcGetChild(0)->pcGetChild(1)->vSetValue(12); 
-    
-    
-
-    // c_root.pcGetChild(1)->vAddNewChild(); 
-
-    // c_root.pcGetChild(1)->vAddNewChild(); 
-    
-
-    // c_root.pcGetChild(1)->pcGetChild(0)->vSetValue(21); 
-    // c_root.pcGetChild(1)->pcGetChild(1)->vSetValue(22); 
-    // c_root.v_PrintAllBelow();
-    std::cout << "end";
+    std::cout << "hello: " << problem.compute(a, problem.load("testCases/test_pr.txt")) << std::endl;
 };

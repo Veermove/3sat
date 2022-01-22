@@ -1,6 +1,6 @@
 CPP = g++
-CPPSTD = -std=c++98
-LIBS = play.o
+CPPSTD = -std=c++11
+LIBS = play.o CMax3SatProblem.o Pack.o
 
 default: $(LIBS)
 	$(CPP) $(LIBS) -o play
