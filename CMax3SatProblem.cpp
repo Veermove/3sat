@@ -29,7 +29,8 @@ std::vector<Pack*> CMax3SatProblem::load(std::string filename)
 
 int CMax3SatProblem::compute(std::vector<bool> solution, std::vector<Pack *> clauses)
 {
-
+    std::cout << "CMax3SatProblem::compute" << std::endl;
+    
     // creating a map of true/false to corresponding int
     std::unordered_map<int, bool> solutionMap;
     
