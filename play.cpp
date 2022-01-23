@@ -1,16 +1,25 @@
+#include "CMax3SatProblem.hpp"
+#include "CGAOptimizer.hpp"
 #include <iostream>
 #include <vector>
 #include <string>
-#include "CMax3SatProblem.hpp"
 
 int main () 
 {
+    const int population_size = 50;
+    const int crossover_prop = 50;
+    const int mutation_prop = 70;
     CMax3SatProblem problem;
-    // problem.load("m3s_50_0.txt");
+    CGAOptimizer optimizer(population_size, crossover_prop, mutation_prop, problem);
+    if (optimizer.initialize("testCases/m3s_50_0.txt"))
+    {
+        // optimizer.show_best();
+        optimizer.run_iteration();
+        // optimizer.show_best();
+    } else 
+    {
+        std::cout << "Failed to open file" << std::endl;
+    }
 
-    std::vector<bool> a;
-    a.push_back(false);
-    a.push_back(true);
-
-    std::cout << "hello: " << problem.compute(a, problem.load("testCases/test_pr.txt")) << std::endl;
+    
 };

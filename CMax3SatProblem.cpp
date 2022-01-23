@@ -24,6 +24,7 @@ std::vector<Pack*> CMax3SatProblem::load(std::string filename)
     }
 
     givenfile.close();
+    clauses = cases;
     return cases;
 }
 
@@ -83,6 +84,10 @@ int CMax3SatProblem::compute(std::vector<bool> solution, std::vector<Pack *> cla
     return counter;
 }
 
+std::vector<Pack*> CMax3SatProblem::get_clauses()
+{
+    return clauses;
+}
 
 Pack* CMax3SatProblem::get_pack_from_line(std::string line)
 {
