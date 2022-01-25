@@ -1,5 +1,6 @@
 #include "CMax3SatProblem.hpp"
 #include <string>
+#include <set>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -39,56 +40,14 @@ std::vector<Pack*> CMax3SatProblem::load(std::string filename)
 int CMax3SatProblem::compute(std::vector<bool> solution, std::vector<Pack *> clauses)
 {
     // std::cout << "CMax3SatProblem::compute" << std::endl;
-    
-    // creating a map of true/false to corresponding int
-    std::unordered_map<int, bool> solutionMap;
-
-    int iterator = 0;
-    for (auto const& value: solution)
-    {
-        solutionMap[iterator] = value;
-        iterator++;
-    }
-
     int counter = 0;
-
-    // iteratre through vector "clauses" of <Pack *>
     for (auto const& value: clauses)
     {
-        // get variable
-        int firstVar = value->getFirst();
-        // check if this variable is negated and if this negated variable is true 
-        if (value->first_getIsNegated() && !solutionMap[firstVar])
+        if (value->is_staisfied_by(&solution))
         {
             counter++;
-            continue;
-        } else if (solutionMap[firstVar]) // else check if non negated variable is ture
-        {
-            counter++;
-            continue;
         }
-
-        int secondVar = value->getSecond();
-        if (value->second_getIsNegated() && !solutionMap[secondVar])
-        {
-            counter++;
-            continue;
-        } else if (solutionMap[secondVar])
-        {
-            counter++;
-            continue;
-        }
-
-        int thirdVar = value->getThird();
-        if (value->third_getIsNegated() && !solutionMap[thirdVar])
-        {
-            counter++;
-            continue;
-        } else if (solutionMap[thirdVar])
-        {
-            counter++;
-            continue;
-        }
+        
     }
     return counter;
 }
@@ -96,6 +55,18 @@ int CMax3SatProblem::compute(std::vector<bool> solution, std::vector<Pack *> cla
 std::vector<Pack*>* CMax3SatProblem::get_clauses_pointer()
 {
     return &clauses;
+}
+
+int CMax3SatProblem::get_variable_number()
+{
+    std::set<int> variables;
+    for (auto &val : clauses)
+    {
+        variables.insert(val->getFirst());
+        variables.insert(val->getThird());
+        variables.insert(val->getSecond());
+    }
+    return variables.size();
 }
 
 Pack* CMax3SatProblem::get_pack_from_line(std::string line)

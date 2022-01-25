@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include <string>
 
 class Pack 
@@ -8,6 +9,8 @@ class Pack
         Pack(int _first, int _second, int _third); 
         Pack(int _first, bool _first_negated, int _second, bool _second_negated, int _third, bool _third_negated); 
         ~Pack();
+
+        bool is_staisfied_by(const std::vector<bool>* genome);
 
         int getFirst();
         int getSecond();

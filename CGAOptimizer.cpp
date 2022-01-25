@@ -2,11 +2,13 @@
 
 CGAOptimizer::CGAOptimizer() { }
 
-CGAOptimizer::CGAOptimizer(int _population_size, int _crossover_prop, int _mutation_prop, CMax3SatProblem *_problem)
+CGAOptimizer::CGAOptimizer(int _population_size, int _crossover_prop, int _mutation_prop, int _parental_bias,
+     CMax3SatProblem *_problem)
 {
     population_size = _population_size;
     crossover_prop = _crossover_prop; 
     mutation_prop = _mutation_prop; 
+    parental_bias = _parental_bias;
     problem = _problem;
 }
 
@@ -27,9 +29,7 @@ bool CGAOptimizer::initialize(std::string filename)
     try 
     {
         clauses = problem->load(filename);
-        // Not implemented "find max"
-        // variable_quantity = problem->get_variable_number();
-        variable_quantity = 50;
+        variable_quantity = problem->get_variable_number();
     } catch (...)
     {
         return false;
@@ -37,8 +37,8 @@ bool CGAOptimizer::initialize(std::string filename)
 
     for (int i = 0; i < population_size; i++)
     {
-        CGAIndividual *randomized = new CGAIndividual(false, variable_quantity, problem);
-        (*randomized).initialize_random(variable_quantity);
+        CGAIndividual *randomized = new CGAIndividual(true, variable_quantity, problem);
+        (*randomized).randomize(variable_quantity);
         solutions.push_back(randomized);
     }
 
@@ -48,7 +48,7 @@ bool CGAOptimizer::initialize(std::string filename)
 void CGAOptimizer::run_iteration()
 {
     std::vector<CGAIndividual*> next_generation;
-    // std::cout << next_generation.size() << " < " << solutions.size() << std::endl;
+
     while (next_generation.size() < solutions.size())
     {
         CGAIndividual *parent_one = run_tournament();
@@ -71,11 +71,9 @@ void CGAOptimizer::run_iteration()
 
 std::tuple<CGAIndividual, CGAIndividual> CGAOptimizer::run_crossover(CGAIndividual parent1, CGAIndividual parent2)
 {
-    const int bias = 50;
-    srand (time(NULL));
     if (Helper::random_true_false(crossover_prop)) 
     {
-        return CGAIndividual::perform_crossover(parent1, parent2, bias);
+        return CGAIndividual::perform_crossover(parent1, parent2, parental_bias);
     } else 
     {
         return std::make_pair(parent1, parent2);
@@ -92,16 +90,25 @@ CGAIndividual* CGAOptimizer::run_tournament()
 void CGAOptimizer::show_best()
 {
     CGAIndividual *winner = solutions[0];
-    int winners_result = problem->compute(winner->get_values(), *(problem->get_clauses_pointer()));
+    // int winners_result = problem->compute(winner->get_values(), *(problem->get_clauses_pointer()));
+
+    int winners_result = winner->get_fitness();
 
     for (int i = 1; i < solutions.size(); i++)
     {
-        int cur_res = problem->compute(solutions[i]->get_values(), *(problem->get_clauses_pointer()));
+        int cur_res = solutions[i]->get_fitness();
         if (cur_res >= winners_result)
         {
             winners_result = cur_res;
             winner = solutions[i];
         }
     }
-    std::cout << "Best result in current generation: " << winner->get_fitness() << "/" << problem->get_clauses_pointer()->size() << std::endl;
+    std::cout << "Best result in current generation: " << winner->get_fitness() << "/" << problem->get_clauses_pointer()->size();
+    std::string genome = " , genome: ";
+    for (auto const &val : winner->get_values()) 
+    {
+        genome += val ? '1' : '0';
+    }
+    // std::cout << genome;
+    std::cout << std::endl;
 }

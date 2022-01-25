@@ -23,7 +23,7 @@ class CGAIndividual
         // CROSSOVER
         static std::tuple<CGAIndividual, CGAIndividual> perform_crossover(CGAIndividual parent1, CGAIndividual parent2, int bias);
 
-        void initialize_random(int s_size);
+        void randomize(int s_size);
         void set_values(std::vector<bool> _values);
         std::vector<bool> get_values(); 
         CMax3SatProblem* get_problem();

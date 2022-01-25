@@ -39,6 +39,37 @@ std::string Pack::toString()
     return "Pack: " + fn + std::to_string(first) + ", " + sn + std::to_string(second) + ", " + tn + std::to_string(third);
 }
 
+bool Pack::is_staisfied_by(const std::vector<bool>* genome)
+{
+    bool ret = false;
+    
+    if (first_isNegated && !(*genome).at(first))
+    {
+        ret = true;
+    } else if ((*genome).at(first))
+    {
+        ret = true;
+    }
+
+    if (second_isNegated && !(*genome).at(first))
+    {
+        ret = true;
+    } else if ((*genome).at(first))
+    {
+        ret = true;
+    }
+
+    if (third_isNegated && !(*genome).at(first))
+    {
+        ret = true;
+    } else if ((*genome).at(first))
+    {
+        ret = true;
+    }
+    return ret;
+}
+
+
 int Pack::getFirst()
 {
     return first;
