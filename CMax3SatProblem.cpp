@@ -9,7 +9,6 @@
 
 CMax3SatProblem::~CMax3SatProblem()
 {
-    std::cout << "destrukcja XDD" << std::endl;
     for (auto & value: clauses)
     {
         delete value;
@@ -39,12 +38,11 @@ std::vector<Pack*> CMax3SatProblem::load(std::string filename)
 
 int CMax3SatProblem::compute(std::vector<bool> solution, std::vector<Pack *> clauses)
 {
-    std::cout << "CMax3SatProblem::compute" << std::endl;
+    // std::cout << "CMax3SatProblem::compute" << std::endl;
     
     // creating a map of true/false to corresponding int
     std::unordered_map<int, bool> solutionMap;
-    
-    // iteratre through vector "solution" of <bool>
+
     int iterator = 0;
     for (auto const& value: solution)
     {
@@ -53,12 +51,10 @@ int CMax3SatProblem::compute(std::vector<bool> solution, std::vector<Pack *> cla
     }
 
     int counter = 0;
-    std::cout << "CMax3SatProblem::compute -> Starting calc" << std::endl;
 
     // iteratre through vector "clauses" of <Pack *>
     for (auto const& value: clauses)
     {
-        // std::cout << " compute: " << value->toString() << std::endl;
         // get variable
         int firstVar = value->getFirst();
         // check if this variable is negated and if this negated variable is true 
@@ -94,13 +90,11 @@ int CMax3SatProblem::compute(std::vector<bool> solution, std::vector<Pack *> cla
             continue;
         }
     }
-    std::cout << "CMax3SatProblem::compute -> Success" << std::endl;
     return counter;
 }
 
 std::vector<Pack*>* CMax3SatProblem::get_clauses_pointer()
 {
-    std::cout << "CMax3SatProblem::get_clauses_pointer" << std::endl;
     return &clauses;
 }
 

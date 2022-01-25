@@ -39,10 +39,7 @@ CGAIndividual::~CGAIndividual()
 
 int CGAIndividual::get_fitness()
 {   
-    std::cout << "CGAIndividual::get_fitness" << std::endl;
-    auto problem_clauses_pointer = problem->get_clauses_pointer(); 
-    std::cout << "1" << std::endl;
-    auto problem_clauses = *(problem_clauses_pointer);
+    auto problem_clauses = *(problem->get_clauses_pointer()); 
     return problem->compute(values, problem_clauses);
 }
 

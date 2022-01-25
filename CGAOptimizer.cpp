@@ -51,27 +51,19 @@ void CGAOptimizer::run_iteration()
     // std::cout << next_generation.size() << " < " << solutions.size() << std::endl;
     while (next_generation.size() < solutions.size())
     {
-        // std::cout << "START SIZE " << next_generation.size() << std::endl;
-        
         CGAIndividual *parent_one = run_tournament();
         CGAIndividual *parent_two = run_tournament();
-        // std::cout << "safe 1" << std::endl;
+        
         CGAIndividual *child_one = new CGAIndividual(false, variable_quantity, problem);
         CGAIndividual *child_two = new CGAIndividual(false, variable_quantity, problem);
 
-        // std::cout << "safe 2" << std::endl;
-
         std::tie(*child_one, *child_two) = run_crossover(*parent_one, *parent_two);
 
-        // std::cout << "safe 3" << std::endl;
-        
         (*child_one).perform_mutation(mutation_prop);
         (*child_two).perform_mutation(mutation_prop);
         
         next_generation.push_back(child_one);
         next_generation.push_back(child_two);
-
-        // std::cout << "END SIZE " << next_generation.size() << std::endl;
     }
     solutions = next_generation;
     // std::cout << "endof CGAOptimizer::run_iteration()" << std::endl;
