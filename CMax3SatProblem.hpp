@@ -8,6 +8,7 @@ class CMax3SatProblem
         ~CMax3SatProblem();
         std::vector<Pack*> load(std::string filename); 
         int compute(std::vector<bool> solution, std::vector<Pack *> clauses);
+        int get_variable_number();
 
         std::vector<Pack*>* get_clauses_pointer();
     private:

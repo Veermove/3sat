@@ -68,7 +68,7 @@ std::tuple<CGAIndividual, CGAIndividual> CGAIndividual::perform_crossover(
 
     for (int i = 0; i < childsize; i++)
     {
-        if (rand() % 100 > bias) 
+        if (rand() % 100 >= bias) 
         {
             child_one_values[i] = parent1.get_values()[i];
             child_two_values[i] = !parent1.get_values()[i];
@@ -84,11 +84,13 @@ std::tuple<CGAIndividual, CGAIndividual> CGAIndividual::perform_crossover(
     return std::make_pair(child_one, child_two);
 }
 
-void CGAIndividual::initialize_random(int s_size)
+void CGAIndividual::randomize(int s_size)
 {
+    values.clear();
     for (int i = 0; i < s_size; i++)
     {
-        bool val = (rand() % 100) % 2 == 0 ? true : false;
+        int ra = (rand() % 100);  
+        bool val = ra % 2 == 0 ? true : false;
         values.push_back(val);
     }
 }
