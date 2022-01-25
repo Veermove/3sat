@@ -11,7 +11,8 @@ class CGAOptimizer
 {
     public:
         CGAOptimizer();
-        CGAOptimizer(int _population_size, int _crossover_prop, int _mutation_prop, CMax3SatProblem _problem);
+        CGAOptimizer(int _population_size, int _crossover_prop, int _mutation_prop, CMax3SatProblem *_problem);
+        ~CGAOptimizer();
 
         bool initialize(std::string filename);
         void run_iteration();
@@ -29,7 +30,7 @@ class CGAOptimizer
         std::vector<Pack*> clauses;
         std::vector<CGAIndividual*> solutions;
 
-        CMax3SatProblem problem; 
+        CMax3SatProblem *problem; 
         Helper helper;
 
         int variable_quantity;

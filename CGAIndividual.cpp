@@ -1,8 +1,20 @@
 #include "CGAIndividual.hpp"
+#include "Helper.hpp"
+#include <iostream>
 
 CGAIndividual::CGAIndividual() { }
 
-CGAIndividual::CGAIndividual(int s_size, CMax3SatProblem _problem) 
+CGAIndividual::CGAIndividual(const CGAIndividual &other)
+{
+    problem = other.problem;
+    values = other.values;
+    for (int i = 0; i < other.values.size(); i++) 
+    {
+        values[i] = other.values[i];
+    }
+}
+
+CGAIndividual::CGAIndividual(int s_size, CMax3SatProblem *_problem) 
 {
     for (int i = 0; i < s_size; i++)
     {
@@ -11,7 +23,7 @@ CGAIndividual::CGAIndividual(int s_size, CMax3SatProblem _problem)
     problem = _problem;
 }
 
-CGAIndividual::CGAIndividual(bool fill_value, int s_size, CMax3SatProblem _problem) 
+CGAIndividual::CGAIndividual(bool fill_value, int s_size, CMax3SatProblem *_problem) 
 {
     for (int i = 0; i < s_size; i++)
     {
@@ -20,34 +32,43 @@ CGAIndividual::CGAIndividual(bool fill_value, int s_size, CMax3SatProblem _probl
     problem = _problem;
 }
 
-CGAIndividual::~CGAIndividual() { }
+CGAIndividual::~CGAIndividual() 
+{
+    values.clear();
+}
 
 int CGAIndividual::get_fitness()
-{
-    return problem.compute(values, problem.get_clauses());
+{   
+    std::cout << "CGAIndividual::get_fitness" << std::endl;
+    auto problem_clauses_pointer = problem->get_clauses_pointer(); 
+    std::cout << "1" << std::endl;
+    auto problem_clauses = *(problem_clauses_pointer);
+    return problem->compute(values, problem_clauses);
 }
 
 void CGAIndividual::perform_mutation(int prop_of_gene_mutation)
 {
-    srand (time(NULL));
     for (int i = 0; i < values.size(); i++)
     {
-        if ((rand() % 100) + 1 <= prop_of_gene_mutation) 
+        if (Helper::random_true_false(prop_of_gene_mutation)) 
         {
             values[i] = !values[i];
         }
     }
 }
 
-std::tuple<CGAIndividual, CGAIndividual> CGAIndividual::perform_crossover(CGAIndividual parent1, CGAIndividual parent2, int bias)
+std::tuple<CGAIndividual, CGAIndividual> CGAIndividual::perform_crossover(
+    CGAIndividual parent1, CGAIndividual parent2, int bias)
 {
+    // std::cout << "CGAIndividual::perform_crossover" << std::endl;
     // UNIFORM CROSSOVER
     int childsize = parent1.get_values().size();
     CGAIndividual child_one(childsize, parent1.get_problem());
     CGAIndividual child_two(childsize, parent1.get_problem());
-    std::vector<bool> child_one_values;
-    std::vector<bool> child_two_values;
-    srand (time(NULL));
+
+    std::vector<bool> child_one_values = parent1.get_values();
+    std::vector<bool> child_two_values = parent2.get_values();
+
     for (int i = 0; i < childsize; i++)
     {
         if (rand() % 100 > bias) 
@@ -62,13 +83,12 @@ std::tuple<CGAIndividual, CGAIndividual> CGAIndividual::perform_crossover(CGAInd
     }
     child_one.set_values(child_one_values);
     child_two.set_values(child_two_values);
+
     return std::make_pair(child_one, child_two);
 }
 
 void CGAIndividual::initialize_random(int s_size)
 {
-    
-    srand (time(NULL));
     for (int i = 0; i < s_size; i++)
     {
         bool val = (rand() % 100) % 2 == 0 ? true : false;
@@ -86,7 +106,7 @@ std::vector<bool> CGAIndividual::get_values()
     return values;
 }
 
-CMax3SatProblem CGAIndividual::get_problem()
+CMax3SatProblem* CGAIndividual::get_problem()
 {
     return problem;
 }

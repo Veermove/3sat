@@ -1,3 +1,4 @@
+#include <iostream>
 #include <string>
 #include <sstream>
 #include "Pack.hpp"
@@ -35,9 +36,7 @@ std::string Pack::toString()
     std::string fn = first_isNegated ? "-" : "";
     std::string sn = second_isNegated ? "-" : "";
     std::string tn = third_isNegated ? "-" : "";
-    std::stringstream ss;
-    ss << "Pack: " << fn << first << ", " << sn << second << ", " << tn << third << "; ";
-    return ss.str();
+    return "Pack: " + fn + std::to_string(first) + ", " + sn + std::to_string(second) + ", " + tn + std::to_string(third);
 }
 
 int Pack::getFirst()

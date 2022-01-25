@@ -3,15 +3,15 @@
 #include <vector>
 #include <tuple>
 #include <random>
-#include <ctime>
 
 class CGAIndividual
 {
 
     public:
         CGAIndividual();
-        CGAIndividual(int s_size, CMax3SatProblem _problem);
-        CGAIndividual(bool fill_value, int s_size, CMax3SatProblem _problem);
+        CGAIndividual(const CGAIndividual &other);
+        CGAIndividual(int s_size, CMax3SatProblem *_problem);
+        CGAIndividual(bool fill_value, int s_size, CMax3SatProblem *_problem);
         ~CGAIndividual();
 
         // FITNESS
@@ -26,9 +26,9 @@ class CGAIndividual
         void initialize_random(int s_size);
         void set_values(std::vector<bool> _values);
         std::vector<bool> get_values(); 
-        CMax3SatProblem get_problem();
+        CMax3SatProblem* get_problem();
     private:
         std::vector<bool> values;
-        CMax3SatProblem problem;
+        CMax3SatProblem *problem;
 
 };
