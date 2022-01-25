@@ -5,10 +5,11 @@
 class CMax3SatProblem
 {
     public:
+        ~CMax3SatProblem();
         std::vector<Pack*> load(std::string filename); 
         int compute(std::vector<bool> solution, std::vector<Pack *> clauses);
 
-        std::vector<Pack*> get_clauses();
+        std::vector<Pack*>* get_clauses_pointer();
     private:
         Pack* get_pack_from_line(std::string line);
 
