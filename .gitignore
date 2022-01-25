@@ -1,6 +1,5 @@
 .vscode
 *.o
 /max3sat
-/testCases
 play
 /dupa
