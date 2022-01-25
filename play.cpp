@@ -11,9 +11,9 @@ int main ()
     // 1643118284 -- corrupted size vs. prev_size
     //               Aborted (core dumped)
     // 1643118323 -- 
-    auto ti = time(NULL);
-    srand (1643118323);
-    std::cout << "TIME " << ti << std::endl; 
+    auto time_seed = time(NULL);
+    srand (time_seed);
+    std::cout << "TIME " << time_seed << std::endl; 
     const int population_size = 50;
     const int crossover_prop = 50;
     const int mutation_prop = 70;
@@ -23,10 +23,11 @@ int main ()
     
     if (optimizer.initialize("testCases/m3s_50_0.txt"))
     {
-        int iterations = 2;
+        int iterations = 10;
+        optimizer.show_best();
         while (iterations > 0)
         {
-            optimizer.show_best();
+           
             optimizer.run_iteration();
             optimizer.show_best();
             iterations--;

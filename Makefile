@@ -1,5 +1,5 @@
 CPP = g++
-CPPSTD = -std=c++11
+CPPSTD = -std=c++11 -g
 LIBS = play.o CMax3SatProblem.o CGAIndividual.o CGAOptimizer.o Helper.o Pack.o
 
 default: $(LIBS)

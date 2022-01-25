@@ -4,13 +4,11 @@
 CGAIndividual* Helper::run_tournament(int _tournament_size, 
     std::vector<CGAIndividual*> population, CMax3SatProblem *problem)
 {
-    std::cout << "Helper::run_tournament(...)" << std::endl;
-    
     std::vector<CGAIndividual*> winners = {};
 
     for (int i = 0; i < _tournament_size; i++)
     {
-        int winner_index = (rand() % population.size()) - 1;
+        int winner_index = rand() % population.size();
         winners.push_back(population[winner_index]); 
         population.erase(population.begin() + winner_index);
     }
@@ -19,21 +17,20 @@ CGAIndividual* Helper::run_tournament(int _tournament_size,
 
     int winners_result = winner->get_fitness();
 
-    std::cout << "check 2 + " << winners.size() << std::endl;
-
     for (int i = 1; i < winners.size(); i++)
     {
-        std::cout << "check 3 : " << winners.size() << std::endl;
-        // int cur_res = problem->compute(winners[i]->get_values(), *problem->get_clauses_pointer());
-        int cur_res = winners[i]->get_fitness();
-        std::cout << "check 3 : " << i << " cur res " << cur_res << std::endl;
+        auto temp_winner = winners[i]; 
+        int as = 12;
+
+        auto tepcla = temp_winner->get_problem();
+
+        int cur_res = temp_winner->get_fitness();
         if (cur_res > winners_result)
         {
             winners_result = cur_res;
             winner = winners[i];
         }
     }
-    std::cout << "winner res " << winners_result << std::endl;
     return winner;
 }
 
