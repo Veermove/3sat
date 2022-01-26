@@ -41,7 +41,7 @@ CGAIndividual::~CGAIndividual()
 
 int CGAIndividual::get_fitness()
 {   
-    auto problem_clauses = *(problem->get_clauses_pointer()); 
+    auto problem_clauses = *(problem->get_clauses_pointer());
     return problem->compute(values, problem_clauses);
 }
 

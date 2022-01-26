@@ -22,10 +22,12 @@ CGAOptimizer::~CGAOptimizer()
     {
         delete value;
     }
+    delete problem;
 }
 
 bool CGAOptimizer::initialize(const std::string filename)
 {
+    
     try 
     {
         clauses = problem->load(filename);
@@ -83,6 +85,11 @@ void CGAOptimizer::run_iteration()
     }
 
     solutions = next_generation;
+
+    // for (const auto &val : next_generation)
+    // {
+    //     delete val;
+    // }
 }
 
 std::tuple<CGAIndividual, CGAIndividual> CGAOptimizer::run_crossover(const CGAIndividual parent1, const CGAIndividual parent2)

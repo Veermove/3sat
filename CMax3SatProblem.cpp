@@ -47,7 +47,6 @@ int CMax3SatProblem::compute(std::vector<bool> solution, std::vector<Pack *> cla
         {
             counter++;
         }
-        
     }
     return counter;
 }
@@ -81,7 +80,6 @@ Pack* CMax3SatProblem::get_pack_from_line(const std::string line)
         bool first_negation = first < 0 || (first == 0 && !match.str(1).find("-"));
         bool second_negation = second < 0 || (second == 0 && !match.str(2).find("-"));
         bool third_negation = third < 0 || (third == 0 && !match.str(3).find("-"));
-        
         return new Pack(std::abs(first), first_negation, 
             std::abs(second), second_negation, 
             std::abs(third), third_negation);

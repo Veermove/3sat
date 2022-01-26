@@ -44,23 +44,23 @@ bool Pack::is_staisfied_by(const std::vector<bool>* genome)
     if (first_isNegated && !(*genome).at(first))
     {
         return true;
-    } else if ((*genome).at(first))
+    } else if (!first_isNegated && (*genome).at(first))
     {
         return true;
     }
 
-    if (second_isNegated && !(*genome).at(first))
+    if (second_isNegated && !(*genome).at(second))
     {
         return true;
-    } else if ((*genome).at(first))
+    } else if (!second_isNegated && (*genome).at(second))
     {
         return true;
     }
 
-    if (third_isNegated && !(*genome).at(first))
+    if (third_isNegated && !(*genome).at(third))
     {
         return true;
-    } else if ((*genome).at(first))
+    } else if (!third_isNegated && (*genome).at(third))
     {
         return true;
     }
