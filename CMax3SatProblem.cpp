@@ -69,7 +69,7 @@ int CMax3SatProblem::get_variable_number()
     return variables.size();
 }
 
-Pack* CMax3SatProblem::get_pack_from_line(std::string line)
+Pack* CMax3SatProblem::get_pack_from_line(const std::string line)
 {
     std::regex patter("\\( (-*\\d+)  (-*\\d+)  (-*\\d+)  \\)");
     std::smatch match; 

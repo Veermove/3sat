@@ -14,7 +14,7 @@ class CMax3SatProblem
 
         std::vector<Pack*>* get_clauses_pointer();
     private:
-        Pack* get_pack_from_line(std::string line);
+        Pack* get_pack_from_line(const std::string line);
 
         std::vector<Pack*> clauses;
 

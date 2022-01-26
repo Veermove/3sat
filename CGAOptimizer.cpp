@@ -24,7 +24,7 @@ CGAOptimizer::~CGAOptimizer()
     }
 }
 
-bool CGAOptimizer::initialize(std::string filename)
+bool CGAOptimizer::initialize(const std::string filename)
 {
     try 
     {
@@ -53,23 +53,39 @@ void CGAOptimizer::run_iteration()
     {
         CGAIndividual *parent_one = run_tournament();
         CGAIndividual *parent_two = run_tournament();
-        
+
+        // CGAIndividual child_one(false, variable_quantity, problem);
+        // CGAIndividual child_two(false, variable_quantity, problem);
+
+        // std::tie(child_one, child_two) = run_crossover(*parent_one, *parent_two);
+
+        // child_one.perform_mutation(mutation_prop);
+        // child_two.perform_mutation(mutation_prop);
+
+        // next_generation.push_back(&child_one);
+        // next_generation.push_back(&child_two);
+
         CGAIndividual *child_one = new CGAIndividual(false, variable_quantity, problem);
         CGAIndividual *child_two = new CGAIndividual(false, variable_quantity, problem);
 
         std::tie(*child_one, *child_two) = run_crossover(*parent_one, *parent_two);
 
-        (*child_one).perform_mutation(mutation_prop);
-        (*child_two).perform_mutation(mutation_prop);
-        
+        child_one->perform_mutation(mutation_prop);
+        child_two->perform_mutation(mutation_prop);
+
         next_generation.push_back(child_one);
         next_generation.push_back(child_two);
     }
+
+    for (const auto &val : solutions)
+    {
+        delete val;
+    }
+
     solutions = next_generation;
-    // std::cout << "endof CGAOptimizer::run_iteration()" << std::endl;
 }
 
-std::tuple<CGAIndividual, CGAIndividual> CGAOptimizer::run_crossover(CGAIndividual parent1, CGAIndividual parent2)
+std::tuple<CGAIndividual, CGAIndividual> CGAOptimizer::run_crossover(const CGAIndividual parent1, const CGAIndividual parent2)
 {
     if (Helper::random_true_false(crossover_prop)) 
     {
@@ -82,9 +98,8 @@ std::tuple<CGAIndividual, CGAIndividual> CGAOptimizer::run_crossover(CGAIndividu
 
 CGAIndividual* CGAOptimizer::run_tournament()
 {
-    // std::cout << "CGAOptimizer::run_tournament" << std::endl;
     const int tournament_size = 10;
-    return Helper::run_tournament(tournament_size, solutions, problem);
+    return Helper::run_tournament(tournament_size, solutions);
 }
 
 void CGAOptimizer::show_best()

@@ -9,8 +9,7 @@
 class Helper
 {
     public:
-        static CGAIndividual* run_tournament(int _tournament_size, 
-            std::vector<CGAIndividual*> population, CMax3SatProblem *problem);
+        static CGAIndividual* run_tournament(int _tournament_size, std::vector<CGAIndividual*> population);
 
         static bool random_true_false(int _chance_of_truth);
 };

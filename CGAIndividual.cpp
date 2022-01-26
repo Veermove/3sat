@@ -57,10 +57,8 @@ void CGAIndividual::perform_mutation(int prop_of_gene_mutation)
 }
 
 std::tuple<CGAIndividual, CGAIndividual> CGAIndividual::perform_crossover(
-    CGAIndividual parent1, CGAIndividual parent2, int bias)
+    CGAIndividual parent1, CGAIndividual parent2, const int bias)
 {
-    // std::cout << "CGAIndividual::perform_crossover" << std::endl;
-    // UNIFORM CROSSOVER
     int childsize = parent1.get_values().size();
     CGAIndividual child_one(childsize, parent1.get_problem());
     CGAIndividual child_two(childsize, parent1.get_problem());
@@ -86,7 +84,7 @@ std::tuple<CGAIndividual, CGAIndividual> CGAIndividual::perform_crossover(
     return std::make_pair(child_one, child_two);
 }
 
-void CGAIndividual::randomize(int s_size)
+void CGAIndividual::randomize(const int s_size)
 {
     values.clear();
     for (int i = 0; i < s_size; i++)
@@ -97,7 +95,7 @@ void CGAIndividual::randomize(int s_size)
     }
 }
 
-void CGAIndividual::set_values(std::vector<bool> _values)
+void CGAIndividual::set_values(const std::vector<bool> _values)
 {
     values = _values;
 }

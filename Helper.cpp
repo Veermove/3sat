@@ -2,8 +2,7 @@
 
 #include <iostream>
 
-CGAIndividual* Helper::run_tournament(int _tournament_size, 
-    std::vector<CGAIndividual*> population, CMax3SatProblem *problem)
+CGAIndividual* Helper::run_tournament(int _tournament_size, std::vector<CGAIndividual*> population)
 {
     std::vector<CGAIndividual*> winners = {};
 

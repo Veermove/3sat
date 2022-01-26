@@ -41,32 +41,30 @@ std::string Pack::toString()
 
 bool Pack::is_staisfied_by(const std::vector<bool>* genome)
 {
-    bool ret = false;
-    
     if (first_isNegated && !(*genome).at(first))
     {
-        ret = true;
+        return true;
     } else if ((*genome).at(first))
     {
-        ret = true;
+        return true;
     }
 
     if (second_isNegated && !(*genome).at(first))
     {
-        ret = true;
+        return true;
     } else if ((*genome).at(first))
     {
-        ret = true;
+        return true;
     }
 
     if (third_isNegated && !(*genome).at(first))
     {
-        ret = true;
+        return true;
     } else if ((*genome).at(first))
     {
-        ret = true;
+        return true;
     }
-    return ret;
+    return false;
 }
 
 

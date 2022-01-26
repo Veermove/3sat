@@ -17,14 +17,14 @@ class CGAOptimizer
             CMax3SatProblem *_problem);
         ~CGAOptimizer();
 
-        bool initialize(std::string filename);
+        bool initialize(const std::string filename);
         void run_iteration();
 
         void show_best();
     
     private:
         CGAIndividual* run_tournament();
-        std::tuple<CGAIndividual, CGAIndividual> run_crossover(CGAIndividual parent1, CGAIndividual parent2);
+        std::tuple<CGAIndividual, CGAIndividual> run_crossover(const CGAIndividual parent1, const CGAIndividual parent2);
 
         // number of CGAIndividuals - solutions exisiting in one generation
         int population_size;
