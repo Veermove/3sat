@@ -1,11 +1,13 @@
 #pragma once
-#include "CMax3SatProblem.hpp"
+
 #include "CGAIndividual.hpp"
+#include "CMax3SatProblem.hpp"
 #include "Helper.hpp"
-#include <iostream>
-#include <vector>
-#include <random>
+
 #include <ctime>
+#include <iostream>
+#include <random>
+#include <vector>
 
 class CGAOptimizer
 {

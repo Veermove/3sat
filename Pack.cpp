@@ -1,7 +1,6 @@
-#include <iostream>
-#include <string>
-#include <sstream>
 #include "Pack.hpp"
+
+#include <iostream>
 
 Pack::Pack()
 {
@@ -16,6 +15,7 @@ Pack::Pack(int _first, int _second, int _third)
     second = _second;
     third = _third;
 }
+
 Pack::Pack(
     int _first, bool _first_negated, 
     int _second, bool _second_negated, 

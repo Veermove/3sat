@@ -1,8 +1,10 @@
 #pragma once
+
 #include "CMax3SatProblem.hpp"  
-#include <vector>
-#include <tuple>
+
 #include <random>
+#include <tuple>
+#include <vector>
 
 class CGAIndividual
 {

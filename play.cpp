@@ -1,8 +1,9 @@
-#include "CMax3SatProblem.hpp"
 #include "CGAOptimizer.hpp"
+#include "CMax3SatProblem.hpp"
+
 #include <iostream>
-#include <vector>
 #include <string>
+#include <vector>
 
 int main () 
 {
@@ -19,7 +20,7 @@ int main ()
     
     if (optimizer.initialize("testCases/m3s_350_50.txt"))
     {
-        int iterations = 100;
+        int iterations = 10;
         optimizer.show_best();
         while (iterations > 0)
         {

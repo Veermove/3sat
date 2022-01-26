@@ -1,5 +1,7 @@
 #include "CGAIndividual.hpp"
+
 #include "Helper.hpp"
+
 #include <iostream>
 
 CGAIndividual::CGAIndividual() { }

@@ -1,5 +1,7 @@
 #pragma once
+
 #include "Pack.hpp"
+
 #include <vector>
 
 class CMax3SatProblem

@@ -1,12 +1,12 @@
 #include "CMax3SatProblem.hpp"
-#include <string>
-#include <set>
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <regex>
-#include <unordered_map>
+
 #include <cstdlib>
+#include <fstream>
+#include <iostream>
+#include <regex>
+#include <set>
+#include <string>
+#include <vector>
 
 CMax3SatProblem::~CMax3SatProblem()
 {

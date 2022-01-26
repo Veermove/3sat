@@ -1,4 +1,5 @@
 #include "Helper.hpp"
+
 #include <iostream>
 
 CGAIndividual* Helper::run_tournament(int _tournament_size, 
@@ -19,12 +20,7 @@ CGAIndividual* Helper::run_tournament(int _tournament_size,
 
     for (int i = 1; i < winners.size(); i++)
     {
-        auto temp_winner = winners[i]; 
-        int as = 12;
-
-        auto tepcla = temp_winner->get_problem();
-
-        int cur_res = temp_winner->get_fitness();
+        int cur_res = winners[i]->get_fitness();
         if (cur_res > winners_result)
         {
             winners_result = cur_res;

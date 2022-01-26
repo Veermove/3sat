@@ -1,8 +1,9 @@
 #pragma once
+
 #include "CGAIndividual.hpp"
-#include <vector>
+
 #include <random>
-#include <ctime>
+#include <vector>
 
 // container class for helper functions
 class Helper
